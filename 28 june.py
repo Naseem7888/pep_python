@@ -111,9 +111,26 @@
 
 
 # Program 7 File Handling
-f = open ('student.txt', mode='w')
-f.write('hello \n')
-f.write('PythonTraning\n')
-f.write('how are you')
-f.close()
-print('writting succes')
+# f = open ('student.txt', mode='w')
+# f.write('hello \n')
+# f.write('PythonTraning\n')
+# f.write('how are you')
+# f.close()
+# print('writting succes')
+
+
+# program 8
+# f= open ("student.txt", mode='r')
+# f.close()
+
+# program 9 file handling reading line by line
+# name = input ('enter your name')
+# age = input ('enter your age')
+# f= open ("student.txt", mode='w')
+# f.write (f"Name: {name}\n")
+# f.write (f"Age: {age}\n")
+# f.close()
+# f = open("student.txt", mode='r')
+# content = f.read()
+# f.close()
+# print(content)
