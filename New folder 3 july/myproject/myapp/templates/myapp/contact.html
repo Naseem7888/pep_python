@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Why Q</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+    <style>
+        /* Extra enhancements for the contact form */
+        .contact-card {
+            background: linear-gradient(135deg, #1a1a1a 80%, #00f0f0 120%);
+            box-shadow: 0 8px 40px 0 rgba(0,255,255,0.15), 0 1.5px 8px 0 rgba(0,255,255,0.10);
+            border: 2px solid rgba(0,255,255,0.25);
+            animation: cardGlow 3s infinite alternate;
+        }
+        @keyframes cardGlow {
+            0% { box-shadow: 0 8px 40px 0 rgba(0,255,255,0.15), 0 1.5px 8px 0 rgba(0,255,255,0.10); }
+            100% { box-shadow: 0 8px 60px 0 rgba(0,255,255,0.35), 0 1.5px 16px 0 rgba(0,255,255,0.18); }
+        }
+        .contact-card h2 {
+            letter-spacing: 2px;
+            font-size: 2.7em;
+            background: linear-gradient(90deg, #00f0f0, #00c0c0, #fff 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .form-group input, .form-group textarea {
+            background: rgba(0, 240, 240, 0.08);
+            border: 1.5px solid #00f0f0;
+            color: #fff;
+            font-size: 1.15em;
+            box-shadow: 0 0 8px rgba(0,255,255,0.08);
+            transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border: 1.5px solid #00ffff;
+            background: rgba(0, 240, 240, 0.18);
+            box-shadow: 0 0 16px #00f0f0;
+        }
+        button[type="submit"] {
+            background: linear-gradient(90deg, #00f0f0, #00c0c0 80%);
+            color: #0a0a0a;
+            font-size: 1.2em;
+            font-family: 'Orbitron', sans-serif;
+            border: none;
+            border-radius: 8px;
+            padding: 18px 50px;
+            margin-top: 10px;
+            box-shadow: 0 0 20px rgba(0, 240, 240, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #00cccc, #009999 80%);
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+        .contact-info a {
+            color: #00f0f0;
+            font-weight: bold;
+            text-shadow: 0 0 8px #00f0f0;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .contact-info a:hover {
+            color: #fff;
+            text-shadow: 0 0 16px #00f0f0;
+        }
+        .background-effect-contact {
+            background: radial-gradient(circle at 60% 10%, rgba(0,255,255,0.18) 0%, rgba(0,20,20,0.7) 70%, #0a0a0a 100%);
+            filter: blur(2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="{% url 'home' %}" class="logo">Why Q</a>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="background-effect-contact"></div>
+            <h1 class="animate-fade-in">Get In Touch</h1>
+            <p class="animate-fade-in">We're here to answer your questions. Reach out and we'll respond as soon as we can.</p>
+            <div class="contact-card animate-scale-in">
+                <h2>Send Us a Message</h2>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info animate-fade-in">
+                <p>Or email us directly at: <a href="mailto:whyq@.com">whyq@.com</a></p>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Why Q. All Rights Reserved.</p>
+    </footer>
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <!-- Custom Script for Animations -->
+    <script src="{% static 'myapp/script.js' %}"></script>
+    <script>
+    // Futuristic fade/scale animations
+    gsap.from('.animate-fade-in', {opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: 'power2.out'});
+    gsap.from('.animate-scale-in', {scale: 0.9, opacity: 0, duration: 1, delay: 0.5, ease: 'back.out(1.7)'});
+    </script>
+</body>
+</html>
