@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        /* --- Global Styles --- */
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); /* Deeper, richer gradient */
+            min-height: 100vh;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide overflow for background particles */
+            position: relative; /* Needed for pseudo-elements */
+        }
+
+        /* Animated grid/dot background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px) 0 0 / 20px 20px,
+                radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px) 10px 10px / 20px 20px;
+            animation: grid-pulse 20s infinite linear; /* Slower, pulsing grid animation */
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        @keyframes grid-pulse {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; } /* Movement */
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Subtle starry background behind the grid */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3"><circle cx="1.5" cy="1.5" r="0.5" fill="rgba(200,200,255,0.2)"/></svg>') repeat;
+            animation: starry-twinkle 120s linear infinite;
+            z-index: -2; /* Ensure it's behind the grid */
+        }
+
+        @keyframes starry-twinkle {
+            from { background-position: 0% 0%; }
+            to { background-position: 300% 300%; }
+        }
+
+
+        .card {
+            background: rgba(18, 18, 30, 0.95); /* Even darker, more saturated base */
+            border-radius: 30px; /* More rounded */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(0, 230, 255, 0.1); /* Stronger, double border glow */
+            backdrop-filter: blur(15px) brightness(1.1); /* More intense glassmorphism */
+            -webkit-backdrop-filter: blur(15px) brightness(1.1);
+            animation: fadeInScaleUp 1.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncier, slower intro */
+            transform-style: preserve-3d;
+            perspective: 1200px; /* Stronger 3D perspective */
+            padding: 3.5rem; /* More generous padding */
+            border: none; /* Remove default bootstrap border */
+            position: relative;
+        }
+
+        /* Animated border glow for card */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 32px; /* Slightly larger than card */
+            background: linear-gradient(45deg, #00c6ff, #0072ff, #a770ef, #cf8bf3);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(15px); /* Soft glow */
+            opacity: 0.7;
+            animation: gradient-border 8s ease infinite;
+        }
+
+        @keyframes gradient-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: translateY(70px) scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #33e6ff; /* Brighter, more vibrant aqua */
+            text-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff, 0 0 50px rgba(0, 230, 255, 0.7); /* Stronger, multi-layered glow */
+            animation: neonPulse 1.8s ease-in-out infinite alternate; /* Slower, more impactful pulse */
+            margin-bottom: 3.5rem !important; /* More space below title */
+            position: relative;
+            z-index: 2; /* Ensure title is above any potential overlays */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes neonPulse {
+            0% {
+                text-shadow: 0 0 8px #00eaff, 0 0 15px #00eaff;
+            }
+            100% {
+                text-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff, 0 0 80px rgba(0, 230, 255, 0.8);
+            }
+        }
+
+        .form-label {
+            color: #90d8ed; /* Lighter blue for labels */
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            background: rgba(40, 40, 60, 0.8); /* Slightly lighter input background */
+            border: 1px solid rgba(0, 230, 255, 0.4); /* Stronger border for inputs */
+            color: #ebf5ff; /* Lighter text color in inputs */
+            border-radius: 12px; /* Slightly more rounded inputs */
+            padding: 0.8rem 1.2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4); /* Deeper inner shadow */
+        }
+
+        .form-control:focus {
+            background: rgba(50, 50, 70, 0.95); /* Brighter focus background */
+            border-color: #00ffff; /* Cyber aqua highlight */
+            box-shadow: 0 0 0 0.3rem rgba(0, 230, 255, 0.35), inset 0 2px 8px rgba(0, 0, 0, 0.5); /* Stronger glow and inner shadow */
+            color: #fff;
+            transform: scale(1.01); /* Subtle grow on focus */
+        }
+
+        .btn-futuristic {
+            background: linear-gradient(90deg, #00e6ff 0%, #00aaff 100%); /* Brighter, more vivid gradient */
+            color: #fff;
+            border: none;
+            border-radius: 35px; /* More rounded button */
+            padding: 0.8rem 2.2rem; /* More substantial padding */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-weight: bold;
+            letter-spacing: 1px; /* Tighter letter spacing */
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.5); /* Stronger initial shadow */
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        .btn-futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%; /* Start further left */
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); /* Stronger swipe */
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); /* Slower, smoother swipe */
+            z-index: -1;
+        }
+
+        .btn-futuristic:hover {
+            transform: translateY(-5px) scale(1.05) translateZ(10px); /* More pronounced lift and scale with 3D */
+            box-shadow: 0 12px 35px rgba(0, 198, 255, 0.8), 0 0 40px rgba(0, 198, 255, 0.7); /* Even stronger glow */
+        }
+
+        .btn-futuristic:hover::before {
+            left: 150%; /* End further right */
+        }
+
+        /* --- Specific for the back button on edit page --- */
+        .btn-outline-light {
+            color: #b0dffc; /* Lighter blue for outline */
+            border-color: #b0dffc;
+            background-color: transparent;
+            border-radius: 35px; /* More rounded */
+            padding: 0.8rem 2.2rem; /* More substantial padding */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-outline-light:hover {
+            background-color: rgba(176, 223, 252, 0.15); /* Subtle light blue background */
+            color: #fff;
+            border-color: #e0e0e0;
+            transform: translateY(-4px) scale(1.02); /* More pronounced lift and scale */
+            box-shadow: 0 10px 25px rgba(176, 223, 252, 0.5); /* Stronger glow */
+        }
+
+        .btn-outline-light i {
+            margin-right: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-outline-light:hover i {
+            transform: translateX(-3px); /* Subtle slide for icon */
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card">
+                    <h2 class="mb-4 text-center fw-bold">Edit Student Data</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="name" class="form-label">Student Name</label>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ student.name }}" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" id="age" name="age" class="form-control" value="{{ student.age }}" required>
+                        </div>
+                        <div class="mb-5">
+                            <label for="course" class="form-label">Course</label>
+                            <input type="text" id="course" name="course" class="form-control" value="{{ student.course }}" required>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'student_list' %}" class="btn btn-outline-light">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Roster
+                            </a>
+                            <button type="submit" class="btn btn-futuristic">
+                                Update Data <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
