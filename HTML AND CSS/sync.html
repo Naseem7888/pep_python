@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <body>
+      <h2>Restaurent Order System(open console to see output)</h2>
+      <script>
+        function takeOrder(customer) {
+          console.log(`Taking order from ${customer}`);
+        }
+        function prepareFood(customer) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(`Food for ${customer}`);
+            }, 3000); // 3 seconds delay
+          });
+        }
+        function serveOrder(message) {
+          console.log({message});
+        }
+        // order frome two customers
+        takeOrder("Customer 1");
+        prepareFood("Customer 1").then(serveOrder);
+
+          serveOrder(message);
+      </script>
+    </body>
+  </head>
+</html>
