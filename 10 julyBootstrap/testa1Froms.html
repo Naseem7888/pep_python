@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <form>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email">
+    </div>
+    <div class ="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="password">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Gender</label><br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+        <label class="form-check-label" for="male">Male</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+        <label class="form-check-label" for="female">Female</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Qualification</label><br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="qualification10th" value="10th">
+        <label class="form-check-label" for="qualification10th">10th</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="qualification12th" value="12th">
+        <label class="form-check-label" for="qualification12th">12th</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Degree</label>
+      <select class="form-select" id="degree">
+        <option selected disabled>Select your degree</option>
+        <option value="mns">MNS</option>
+        <option value="bca">BCA</option>
+        <option value="mca">MCA</option>
+        <option value="be">BE</option>
+        <option value="btech">B.Tech</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Favorite Game</label>
+      <select class="form-select" id="favoriteGame">
+        <option selected disabled>Select your favorite game</option>
+        <option value="football">Football</option>
+        <option value="volleyball">Volleyball</option>
+        <option value="cricket">Cricket</option>
+        <option value="basketball">Basketball</option>
+        <option value="tennis">Tennis</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="resumeUpload">Upload Resume</label>
+      <input type="file" class="form-control" id="resumeUpload">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="resumeText">Edit Resume (Optional)</label>
+      <textarea class="form-control" id="resumeText" rows="5" placeholder="You can paste or edit your resume here..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</body>
